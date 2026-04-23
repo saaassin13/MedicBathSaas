@@ -36,12 +36,12 @@ export default function MainLayout({ children }: MainLayoutProps) {
   }
 
   return (
-    <div className={styles['main-layout']}>
-      <div className={styles['top-bar']}>
+    <div className={styles.mainLayout}>
+      <div className={styles.topBar}>
         <Header />
       </div>
-      <div className={styles['body']}>
-        <div className={styles['sidebar-wrapper']}>
+      <div className={styles.body}>
+        <div className={styles.sidebarWrapper}>
           <Sidebar
             collapsed={collapsed}
             onCollapse={setCollapsed}
@@ -49,8 +49,8 @@ export default function MainLayout({ children }: MainLayoutProps) {
             onNavigate={(path) => navigate(path)}
           />
         </div>
-        <div className={styles['content-wrapper']}>
-          <main className={styles['main-content']}>{children}</main>
+        <div className={styles.contentWrapper}>
+          <main className={styles.mainContent}>{children}</main>
         </div>
       </div>
     </div>

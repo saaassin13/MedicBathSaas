@@ -1,6 +1,7 @@
 import { Dropdown } from 'antd'
 import type { MenuProps } from 'antd'
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
+import styles from './Layout.module.css'
 
 export default function Header() {
   const userMenuItems: MenuProps['items'] = [
@@ -20,31 +21,19 @@ export default function Header() {
   ]
 
   return (
-    <div className="header">
-      <div className="header-logo">
-        <div
-          style={{
-            width: 32,
-            height: 32,
-            background: '#FF8C00',
-            borderRadius: 4,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#fff',
-            fontWeight: 'bold',
-          }}
-        >
+    <header className={styles.header}>
+      <div className={styles.headerLogo}>
+        <div className={styles.logoIcon}>
           S
         </div>
         <span>奶牛药浴大数据管理中心</span>
       </div>
       <Dropdown menu={{ items: userMenuItems }} placement="bottomRight">
-        <div className="header-user">
+        <div className={styles.headerUser}>
           <UserOutlined />
           <span>Admin</span>
         </div>
       </Dropdown>
-    </div>
+    </header>
   )
 }

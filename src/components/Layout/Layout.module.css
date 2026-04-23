@@ -1,12 +1,12 @@
 /* 主布局容器 */
-.main-layout {
+.mainLayout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
 /* 顶部栏 - 占满整行 */
-.top-bar {
+.topBar {
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #e8e8e8;
@@ -21,24 +21,31 @@
   padding: 0 24px;
 }
 
-.header-logo {
+.headerLogo {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.header-logo img {
+.logoIcon {
   width: 32px;
   height: 32px;
+  background: #FF8C00;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
 }
 
-.header-logo span {
+.headerLogo span {
   color: #333;
   font-size: 16px;
   font-weight: 500;
 }
 
-.header-user {
+.headerUser {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -53,7 +60,7 @@
 }
 
 /* 侧边栏包装器 */
-.sidebar-wrapper {
+.sidebarWrapper {
   width: 200px;
   flex-shrink: 0;
   background: #fff;
@@ -64,7 +71,7 @@
 
 /* 侧边栏样式 */
 .sidebar {
-  width: 100%;
+  width: 200px;
   flex: 1;
   background: #fff;
   transition: width 0.3s ease;
@@ -72,16 +79,25 @@
   flex-direction: column;
 }
 
-.sidebar.collapsed {
+.sidebarCollapsed {
   width: 64px;
 }
 
-.sidebar-collapsed .sidebar-text {
+.sidebarCollapsed .sidebarText {
   display: none;
 }
 
+/* 折叠按钮 */
+.collapseBtn {
+  padding: 12px 16px;
+  border-top: 1px solid #e8e8e8;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
 /* 内容包装器 */
-.content-wrapper {
+.contentWrapper {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -89,7 +105,7 @@
 }
 
 /* 主内容区样式 */
-.main-content {
+.mainContent {
   flex: 1;
   background: #f5f5f5;
   padding: 16px;
@@ -97,7 +113,7 @@
 }
 
 /* 内容卡片样式 */
-.content-card {
+.contentCard {
   background: #fff;
   border-radius: 8px;
   padding: 24px;

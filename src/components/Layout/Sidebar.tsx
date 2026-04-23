@@ -10,6 +10,7 @@ import {
   MenuUnfoldOutlined,
 } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
+import styles from './Layout.module.css'
 
 interface SidebarProps {
   collapsed: boolean
@@ -62,7 +63,7 @@ export default function Sidebar({ collapsed, onCollapse, activePath, onNavigate 
   }
 
   return (
-    <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+    <div className={`${styles.sidebar} ${collapsed ? styles.sidebarCollapsed : ''}`}>
       <Menu
         theme="light"
         mode="inline"
@@ -73,7 +74,7 @@ export default function Sidebar({ collapsed, onCollapse, activePath, onNavigate 
         onClick={onClick}
         style={{ borderRight: 0, flex: 1 }}
       />
-      <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '16px', borderTop: '1px solid #e8e8e8' }}>
+      <div className={styles.collapseBtn}>
         <button onClick={() => onCollapse(!collapsed)}>
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </button>
