@@ -101,11 +101,55 @@ export default function StatisticsPage() {
         />
       </div>
 
-      {/* 主布局：网格 */}
-      <div className={styles['main-grid']}>
-        {/* 第一行左侧：KPI 卡片 */}
-        <div className={styles['kpi-area']}>
-          <KpiCards data={mockKpiData} />
+      {/* 主布局容器 */}
+      <div className={styles['layout-container']}>
+        {/* 左侧区域 */}
+        <div className={styles['left-area']}>
+          {/* 第一行：KPI 卡片 */}
+          <div className={styles['kpi-row']}>
+            <KpiCards data={mockKpiData} />
+          </div>
+
+          {/* 第二行：趋势图表 */}
+          <div className={styles['chart-row']}>
+            <div className={styles['chart-card']}>
+              <TrendChart
+                title="药浴牛数/识别率统计分析"
+                barData={mockTrendData.cowTrend}
+                lineData={mockTrendData.recognitionTrend}
+                barColor="#1890ff"
+                lineColor="#ff8c00"
+                leftUnit="牛数"
+                rightUnit="%"
+                leftMax={10000}
+                rightMax={100}
+              />
+            </div>
+            <div className={styles['chart-card']}>
+              <TrendChart
+                title="药液用量/均量统计分析"
+                barData={mockTrendData.usageTrend}
+                lineData={mockTrendData.avgTrend}
+                barColor="#52c41a"
+                lineColor="#722ed1"
+                leftUnit="L"
+                rightUnit="ML"
+                leftMax={300}
+                rightMax={20}
+              />
+            </div>
+          </div>
+
+          {/* 第三行：环形图和表格 */}
+          <div className={styles['detail-row']}>
+            <div className={styles['donut-card']}>
+              <DonutChart data={mockDonutData} />
+            </div>
+            <div className={styles['table-card']}>
+              <h4 className={styles['card-title']}>详细列表统计</h4>
+              <DetailTable data={mockDetailData} />
+            </div>
+          </div>
         </div>
 
         {/* 右侧设备状态 - 跨越第一行和第二行 */}
@@ -115,47 +159,6 @@ export default function StatisticsPage() {
             maintenanceStatus={maintenanceStatus}
             runtimeStats={runtimeStats}
           />
-        </div>
-
-        {/* 第二行左侧：趋势图表 */}
-        <div className={styles['chart-area']}>
-          <div className={styles['chart-card']}>
-            <TrendChart
-              title="药浴牛数/识别率统计分析"
-              barData={mockTrendData.cowTrend}
-              lineData={mockTrendData.recognitionTrend}
-              barColor="#1890ff"
-              lineColor="#ff8c00"
-              leftUnit="牛数"
-              rightUnit="%"
-              leftMax={10000}
-              rightMax={100}
-            />
-          </div>
-          <div className={styles['chart-card']}>
-            <TrendChart
-              title="药液用量/均量统计分析"
-              barData={mockTrendData.usageTrend}
-              lineData={mockTrendData.avgTrend}
-              barColor="#52c41a"
-              lineColor="#722ed1"
-              leftUnit="L"
-              rightUnit="ML"
-              leftMax={300}
-              rightMax={20}
-            />
-          </div>
-        </div>
-
-        {/* 第三行：环形图和表格 */}
-        <div className={styles['bottom-area']}>
-          <div className={styles['donut-card']}>
-            <DonutChart data={mockDonutData} />
-          </div>
-          <div className={styles['table-card']}>
-            <h4 className={styles['card-title']}>详细列表统计</h4>
-            <DetailTable data={mockDetailData} />
-          </div>
         </div>
       </div>
     </div>

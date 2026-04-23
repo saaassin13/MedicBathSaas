@@ -2,54 +2,44 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  height: 100%;
 }
 
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-shrink: 0;
 }
 
-/* 主布局：三列网格 */
-.main-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 280px;
-  grid-template-rows: auto auto auto;
+/* 主布局容器 */
+.layout-container {
+  display: flex;
   gap: 12px;
+  flex: 1;
+  min-height: 0;
 }
 
-/* KPI 区域 - 占据左侧 4 列 */
-.kpi-area {
-  grid-column: 1 / 3;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-/* 图表区域 */
-.chart-area {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-/* 右侧设备状态 - 跨越第一行和第二行 */
-.status-area {
-  grid-row: 1 / 3;
+/* 左侧区域 */
+.left-area {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
 }
 
-/* 第三行：环形图 + 表格 */
-.bottom-area {
-  grid-column: 1 / 3;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 12px;
+/* 右侧设备状态 */
+.status-area {
+  width: 260px;
+  flex-shrink: 0;
 }
 
-/* KPI 卡片 */
+/* KPI 卡片行 */
+.kpi-row {
+  flex-shrink: 0;
+}
+
 .kpi-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -86,6 +76,14 @@
   margin-top: 2px;
 }
 
+/* 图表行 */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
 .chart-card {
   background: #fff;
   border-radius: 8px;
@@ -112,6 +110,15 @@
   margin-bottom: 10px;
 }
 
+/* 环形图和表格行 */
+.detail-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+
 .donut-card {
   background: #fff;
   border-radius: 8px;
@@ -122,29 +129,39 @@
   background: #fff;
   border-radius: 8px;
   padding: 10px;
+  overflow: auto;
 }
 
 /* 右侧设备状态卡片 */
-.status-card {
+.status-sidebar {
   background: #fff;
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+
+.status-card {
+  background: #fff;
+  border-radius: 6px;
+  padding: 8px;
 }
 
 .status-card h4 {
   font-size: 12px;
   font-weight: 500;
   color: #333;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .status-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 4px 0;
+  padding: 3px 0;
   border-bottom: 1px solid #f0f0f0;
   font-size: 11px;
 }
