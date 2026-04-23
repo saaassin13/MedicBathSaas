@@ -1,0 +1,72 @@
+.fault-log-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.page-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.content-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.log-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.log-item .timestamp {
+  color: #666;
+  font-size: 14px;
+  font-family: monospace;
+  min-width: 200px;
+}
+
+.log-level {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.log-level.info {
+  background: #e6f7ff;
+  color: #1890ff;
+}
+
+.log-level.warning {
+  background: #fff7e6;
+  color: #faad14;
+}
+
+.log-level.error {
+  background: #fff2e8;
+  color: #ff4d4f;
+}
+
+.log-content {
+  flex: 1;
+  color: #333;
+}

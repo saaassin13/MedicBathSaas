@@ -5,6 +5,7 @@ import UserManagePage from './pages/UserManagement/UserManagePage'
 import MonitoringPage from './pages/Monitoring/MonitoringPage'
 import MaintenancePlanPage from './pages/Maintenance/MaintenancePlanPage'
 import MaintenanceRecordPage from './pages/Maintenance/MaintenanceRecordPage'
+import FaultLogPage from './pages/FaultLog/FaultLogPage'
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
           path="/fault-log"
           element={
             <MainLayout>
-              <div>故障日志信息占位</div>
+              <FaultLogPage />
             </MainLayout>
           }
         />
