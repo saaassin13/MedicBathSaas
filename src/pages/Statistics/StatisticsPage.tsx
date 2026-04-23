@@ -156,21 +156,12 @@ export default function StatisticsPage() {
 
       {/* 第三行：环形图和表格 */}
       <div className={styles['detail-row']}>
-        <div className={styles['detail-section']}>
-          <div className={styles['donut-card']}>
-            <DonutChart data={mockDonutData} />
-          </div>
-          <div className={styles['table-card']}>
-            <h4 className={styles['card-title']}>详细列表统计</h4>
-            <DetailTable data={mockDetailData} />
-          </div>
+        <div className={styles['donut-card']}>
+          <DonutChart data={mockDonutData} />
         </div>
-        <div className={styles['status-section']}>
-          <StatusSidebar
-            deviceStatus={deviceStatus}
-            maintenanceStatus={maintenanceStatus}
-            runtimeStats={runtimeStats}
-          />
+        <div className={styles['table-card']}>
+          <h4 className={styles['card-title']}>详细列表统计</h4>
+          <DetailTable data={mockDetailData} />
         </div>
       </div>
     </div>
