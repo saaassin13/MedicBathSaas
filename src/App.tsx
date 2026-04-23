@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './components/Layout/MainLayout'
 import LoginPage from './pages/Login/LoginPage'
+import UserManagePage from './pages/UserManagement/UserManagePage'
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
           path="/user-management"
           element={
             <MainLayout>
-              <div>用户管理占位</div>
+              <UserManagePage />
             </MainLayout>
           }
         />
