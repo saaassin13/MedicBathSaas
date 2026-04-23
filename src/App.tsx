@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from './components/Layout/MainLayout'
 import LoginPage from './pages/Login/LoginPage'
 import UserManagePage from './pages/UserManagement/UserManagePage'
+import MonitoringPage from './pages/Monitoring/MonitoringPage'
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
           path="/monitoring"
           element={
             <MainLayout>
-              <div>奶厅作业监控占位</div>
+              <MonitoringPage />
             </MainLayout>
           }
         />
