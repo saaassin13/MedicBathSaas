@@ -1,12 +1,36 @@
 import { useState } from 'react'
-import { Select } from 'antd'
 import KpiCards from './KpiCards'
 import TrendChart from './TrendChart'
 import DonutChart from './DonutChart'
 import DetailTable from './DetailTable'
 import StatusSidebar from './StatusSidebar'
+import Cascader from '../../components/common/Cascader'
 import { KpiData } from '../../types'
 import styles from './Statistics.module.css'
+
+// 级联下拉数据
+const hallOptions = [
+  {
+    value: 'mengniu',
+    label: '蒙牛集团',
+    children: [
+      {
+        value: 'northeast',
+        label: '东北大区',
+        children: [
+          {
+            value: 'shuangcheng',
+            label: '双城牧场',
+            children: [
+              { value: 'hall-1', label: '1期奶厅' },
+              { value: 'hall-2', label: '2期奶厅' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+]
 
 // 模拟数据
 const mockKpiData: KpiData = {
@@ -60,17 +84,19 @@ const mockDetailData = [
 ]
 
 export default function StatisticsPage() {
-  const [selectedHall, setSelectedHall] = useState('hall-1')
+  const [selectedHall, setSelectedHall] = useState<string[]>([])
 
   return (
     <div className={styles['statistics-page']}>
       <div className={styles['page-header']}>
         <h2>数据统计分析</h2>
-        <Select
+        <Cascader
+          options={hallOptions}
+          mode="single"
+          placeholder="选择奶厅"
           value={selectedHall}
-          onChange={setSelectedHall}
-          options={[{ value: 'hall-1', label: '1号奶厅' }]}
-          style={{ width: 150 }}
+          onChange={(values) => setSelectedHall(values)}
+          width={200}
         />
       </div>
 
