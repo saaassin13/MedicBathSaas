@@ -96,8 +96,21 @@
 
 ## 阶段八：数据统计模块
 
-- [ ] 8.1 创建数据统计页面
-- [ ] 8.2 导出功能
+- [x] 8.1 创建数据统计页面样式 Statistics.module.css
+  - 验收标准：KPI卡片、图表、状态栏样式
+  - 实际结果：通过
+
+- [x] 8.2 创建图表组件（KpiCards/TrendChart/DonutChart/StatusSidebar/DetailTable）
+  - 验收标准：4个KPI卡片、双轴图表、环形图、设备状态栏
+  - 实际结果：通过
+
+- [x] 8.3 创建当班数据统计页面 StatisticsPage
+  - 验收标准：KPI卡片、趋势图表、环形图、设备状态栏
+  - 实际结果：通过
+
+- [x] 8.4 创建历史数据统计页面 HistoryStatisticsPage
+  - 验收标准：16列数据表格、分页、三级导出功能
+  - 实际结果：通过（npm run build 成功）
 
 ## 阶段九：通用组件
 
