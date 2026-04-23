@@ -1,11 +1,86 @@
 import { useState, useMemo } from 'react'
-import { Select, DatePicker, Button, Table, message } from 'antd'
+import { DatePicker, Button, Table, message } from 'antd'
 import { DownloadOutlined } from '@ant-design/icons'
 import type { ColumnsType } from 'antd/es/table'
 import * as XLSX from 'xlsx'
 import dayjs from 'dayjs'
 import { HistoryRecord } from '../../types'
+import Cascader from '../../components/common/Cascader'
 import styles from './Statistics.module.css'
+
+// 级联下拉数据
+const hallOptions = [
+  {
+    value: 'mengniu',
+    label: '蒙牛集团',
+    children: [
+      {
+        value: 'northeast',
+        label: '东北大区',
+        children: [
+          {
+            value: 'shuangcheng',
+            label: '双城牧场',
+            children: [
+              {
+                value: 'hall-1',
+                label: '1期奶厅',
+                children: [
+                  { value: 'equiper-1', label: '1号转盘-前药浴' },
+                  { value: 'equiper-2', label: '1号转盘-后药浴' },
+                  { value: 'equiper-3', label: '2号转盘-前药浴' },
+                  { value: 'equiper-4', label: '2号转盘-后药浴' },
+                ],
+              },
+              {
+                value: 'hall-2',
+                label: '2期奶厅',
+                children: [
+                  { value: 'equiper-5', label: '1号转盘-前药浴' },
+                  { value: 'equiper-6', label: '1号转盘-后药浴' },
+                ],
+              },
+            ],
+          },
+          {
+            value: 'daqing',
+            label: '大庆牧场',
+            children: [
+              {
+                value: 'hall-3',
+                label: '1期奶厅',
+                children: [
+                  { value: 'equiper-7', label: '1号转盘-前药浴' },
+                  { value: 'equiper-8', label: '1号转盘-后药浴' },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        value: 'north',
+        label: '华北大区',
+        children: [
+          {
+            value: 'huinong',
+            label: '惠农牧场',
+            children: [
+              {
+                value: 'hall-4',
+                label: '1期奶厅',
+                children: [
+                  { value: 'equiper-9', label: '1号转盘-前药浴' },
+                  { value: 'equiper-10', label: '1号转盘-后药浴' },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+]
 
 const mockRecords: HistoryRecord[] = Array.from({ length: 100 }, (_, i) => ({
   id: String(i + 1),
@@ -54,7 +129,7 @@ const exportToExcel = (data: HistoryRecord[], filename: string) => {
 }
 
 export default function HistoryStatisticsPage() {
-  const [selectedHall, setSelectedHall] = useState('all')
+  const [selectedHall, setSelectedHall] = useState<string[]>([])
   const [dateRange, setDateRange] = useState<DateRange>(null)
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([])
   const [currentPage, setCurrentPage] = useState(1)
@@ -63,7 +138,12 @@ export default function HistoryStatisticsPage() {
   // 根据筛选条件过滤数据
   const filteredRecords = useMemo(() => {
     return mockRecords.filter(record => {
-      if (selectedHall !== 'all' && !record.hall.includes(selectedHall)) return false
+      // 奶厅筛选（支持多选）
+      if (selectedHall.length > 0) {
+        const hallMatch = selectedHall.some(v => record.hall.includes(v))
+        if (!hallMatch) return false
+      }
+      // 日期范围筛选
       if (dateRange && dateRange[0] && dateRange[1]) {
         const recordDate = dayjs(record.startTime)
         if (recordDate.isBefore(dateRange[0]) || recordDate.isAfter(dateRange[1])) return false
@@ -114,15 +194,13 @@ export default function HistoryStatisticsPage() {
   return (
     <div className={styles['history-page']}>
       <div className={styles['filter-bar']}>
-        <Select
+        <Cascader
+          options={hallOptions}
+          mode="multiple"
+          placeholder="选择奶厅（支持多选）"
           value={selectedHall}
-          onChange={(val) => { setSelectedHall(val); setCurrentPage(1) }}
-          options={[
-            { value: 'all', label: '全部' },
-            { value: '双城-1期奶厅', label: '双城-1期奶厅' },
-            { value: '双城-2期奶厅', label: '双城-2期奶厅' },
-          ]}
-          style={{ width: 150 }}
+          onChange={(values) => { setSelectedHall(values); setCurrentPage(1) }}
+          width={280}
         />
         <RangePicker
           value={dateRange}
