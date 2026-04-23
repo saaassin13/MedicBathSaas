@@ -1,0 +1,71 @@
+.maintenance-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.page-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.content-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.maintenance-table .ant-table-thead > tr > th {
+  background: #fff7e6;
+}
+
+.remaining-time {
+  font-weight: 500;
+}
+
+.remaining-time.warning {
+  color: #ff4d4f;
+}
+
+.record-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.record-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.record-item .timestamp {
+  color: #666;
+  font-size: 14px;
+  font-family: monospace;
+}
+
+.record-item .status {
+  color: #52c41a;
+  font-size: 14px;
+}
+
+.record-item .content {
+  flex: 1;
+  color: #333;
+}
+
+.record-item .category {
+  color: #999;
+  font-size: 12px;
+}
