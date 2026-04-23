@@ -8,30 +8,6 @@ import Cascader from '../../components/common/Cascader'
 import { KpiData } from '../../types'
 import styles from './Statistics.module.css'
 
-// 级联下拉数据
-const hallOptions = [
-  {
-    value: 'mengniu',
-    label: '蒙牛集团',
-    children: [
-      {
-        value: 'northeast',
-        label: '东北大区',
-        children: [
-          {
-            value: 'shuangcheng',
-            label: '双城牧场',
-            children: [
-              { value: 'hall-1', label: '1期奶厅' },
-              { value: 'hall-2', label: '2期奶厅' },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-]
-
 // 模拟数据
 const mockKpiData: KpiData = {
   cowCount: 425,
@@ -83,11 +59,36 @@ const mockDetailData = [
   { id: '2', startTime: '2026-04-22 14:00', endTime: '2026-04-22 18:00', duration: '04:00:00', recognizedCows: 115, recognizedNipples: 460, unrecognizedNipples: 12, recognitionRate: 97.45, recognizedCowCount: 113, notCupRemoved: 4 },
 ]
 
+// 级联下拉数据
+const hallOptions = [
+  {
+    value: 'mengniu',
+    label: '蒙牛集团',
+    children: [
+      {
+        value: 'northeast',
+        label: '东北大区',
+        children: [
+          {
+            value: 'shuangcheng',
+            label: '双城牧场',
+            children: [
+              { value: 'hall-1', label: '1期奶厅' },
+              { value: 'hall-2', label: '2期奶厅' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+]
+
 export default function StatisticsPage() {
   const [selectedHall, setSelectedHall] = useState<string[]>([])
 
   return (
     <div className={styles['statistics-page']}>
+      {/* 页面标题行 */}
       <div className={styles['page-header']}>
         <h2>数据统计分析</h2>
         <Cascader
@@ -100,52 +101,77 @@ export default function StatisticsPage() {
         />
       </div>
 
-      <KpiCards data={mockKpiData} />
-
-      <div className={styles['charts-row']}>
-        <div className={styles['chart-card']}>
-          <TrendChart
-            title="药浴牛数/识别率统计分析"
-            barData={mockTrendData.cowTrend}
-            lineData={mockTrendData.recognitionTrend}
-            barColor="#1890ff"
-            lineColor="#ff8c00"
-            leftUnit="牛数"
-            rightUnit="%"
-            leftMax={10000}
-            rightMax={100}
-          />
+      {/* 第一行：KPI 卡片 */}
+      <div className={styles['kpi-row']}>
+        <div className={styles['kpi-section']}>
+          <KpiCards data={mockKpiData} />
         </div>
-        <div className={styles['chart-card']}>
-          <TrendChart
-            title="药液用量/均量统计分析"
-            barData={mockTrendData.usageTrend}
-            lineData={mockTrendData.avgTrend}
-            barColor="#52c41a"
-            lineColor="#722ed1"
-            leftUnit="L"
-            rightUnit="ML"
-            leftMax={300}
-            rightMax={20}
+        <div className={styles['status-section']}>
+          <StatusSidebar
+            deviceStatus={deviceStatus}
+            maintenanceStatus={maintenanceStatus}
+            runtimeStats={runtimeStats}
           />
         </div>
       </div>
 
-      <div className={styles['bottom-section']}>
+      {/* 第二行：趋势图表 */}
+      <div className={styles['chart-row']}>
+        <div className={styles['chart-section']}>
+          <div className={styles['chart-card']}>
+            <TrendChart
+              title="药浴牛数/识别率统计分析"
+              barData={mockTrendData.cowTrend}
+              lineData={mockTrendData.recognitionTrend}
+              barColor="#1890ff"
+              lineColor="#ff8c00"
+              leftUnit="牛数"
+              rightUnit="%"
+              leftMax={10000}
+              rightMax={100}
+            />
+          </div>
+          <div className={styles['chart-card']}>
+            <TrendChart
+              title="药液用量/均量统计分析"
+              barData={mockTrendData.usageTrend}
+              lineData={mockTrendData.avgTrend}
+              barColor="#52c41a"
+              lineColor="#722ed1"
+              leftUnit="L"
+              rightUnit="ML"
+              leftMax={300}
+              rightMax={20}
+            />
+          </div>
+        </div>
+        <div className={styles['status-section']}>
+          <StatusSidebar
+            deviceStatus={deviceStatus}
+            maintenanceStatus={maintenanceStatus}
+            runtimeStats={runtimeStats}
+          />
+        </div>
+      </div>
+
+      {/* 第三行：环形图和表格 */}
+      <div className={styles['detail-row']}>
         <div className={styles['detail-section']}>
           <div className={styles['donut-card']}>
             <DonutChart data={mockDonutData} />
           </div>
           <div className={styles['table-card']}>
-            <h4 style={{ marginBottom: 16 }}>详细列表统计</h4>
+            <h4 className={styles['card-title']}>详细列表统计</h4>
             <DetailTable data={mockDetailData} />
           </div>
         </div>
-        <StatusSidebar
-          deviceStatus={deviceStatus}
-          maintenanceStatus={maintenanceStatus}
-          runtimeStats={runtimeStats}
-        />
+        <div className={styles['status-section']}>
+          <StatusSidebar
+            deviceStatus={deviceStatus}
+            maintenanceStatus={maintenanceStatus}
+            runtimeStats={runtimeStats}
+          />
+        </div>
       </div>
     </div>
   )
