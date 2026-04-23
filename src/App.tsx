@@ -6,6 +6,8 @@ import MonitoringPage from './pages/Monitoring/MonitoringPage'
 import MaintenancePlanPage from './pages/Maintenance/MaintenancePlanPage'
 import MaintenanceRecordPage from './pages/Maintenance/MaintenanceRecordPage'
 import FaultLogPage from './pages/FaultLog/FaultLogPage'
+import StatisticsPage from './pages/Statistics/StatisticsPage'
+import HistoryStatisticsPage from './pages/Statistics/HistoryStatisticsPage'
 
 function App() {
   return (
@@ -24,8 +26,8 @@ function App() {
         {/* statistics 父路由承载子路由，避免占位符覆盖子路由 */}
         <Route path="/statistics" element={<MainLayout><Outlet /></MainLayout>}>
           <Route index element={<Navigate to="/statistics/current" replace />} />
-          <Route path="current" element={<div>当班数据统计占位</div>} />
-          <Route path="history" element={<div>历史数据统计占位</div>} />
+          <Route path="current" element={<StatisticsPage />} />
+          <Route path="history" element={<HistoryStatisticsPage />} />
         </Route>
         <Route path="/maintenance" element={<MainLayout><Outlet /></MainLayout>}>
           <Route index element={<Navigate to="/maintenance/plan" replace />} />
