@@ -8,25 +8,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-shrink: 0;
 }
 
-/* 顶部区域：KPI + 设备状态 */
-.top-section {
-  display: flex;
+/* 主布局：网格 */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  grid-template-rows: auto auto auto;
   gap: 12px;
 }
 
-.kpi-row {
-  flex: 1;
+/* KPI 区域 */
+.kpi-area {
+  grid-column: 1;
+  grid-row: 1;
 }
 
-.status-column {
-  width: 260px;
-  flex-shrink: 0;
-}
-
-/* KPI 卡片 */
 .kpi-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -63,8 +60,16 @@
   margin-top: 2px;
 }
 
-/* 图表行 */
-.chart-row {
+/* 设备状态区域 - 跨越第一行和第二行 */
+.status-area {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+/* 图表区域 */
+.chart-area {
+  grid-column: 1;
+  grid-row: 2;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
@@ -96,8 +101,10 @@
   margin-bottom: 10px;
 }
 
-/* 环形图和表格行 */
-.detail-row {
+/* 环形图和表格区域 */
+.detail-area {
+  grid-column: 1;
+  grid-row: 3;
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 12px;
@@ -115,7 +122,7 @@
   padding: 10px;
 }
 
-/* 右侧设备状态 */
+/* 设备状态 */
 .status-sidebar {
   background: #fff;
   border-radius: 8px;
@@ -124,6 +131,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 100%;
 }
 
 .status-card {
@@ -195,7 +203,6 @@
   padding: 12px;
 }
 
-/* 表格字体缩小 */
 .data-table :global(.ant-table) {
   font-size: 11px;
 }
