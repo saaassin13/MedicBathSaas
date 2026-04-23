@@ -1,0 +1,110 @@
+.cascader-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.cascader-input {
+  width: 240px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cascader-input:focus {
+  border-color: #ff8c00;
+  outline: none;
+}
+
+.cascader-input.placeholder {
+  color: #bbb;
+}
+
+.cascader-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 4px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  z-index: 1000;
+}
+
+.cascader-column {
+  width: 120px;
+  border-right: 1px solid #e8e8e8;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.cascader-column:last-child {
+  border-right: none;
+}
+
+.cascader-option {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cascader-option:hover {
+  background: #f5f5f5;
+}
+
+.cascader-option.selected {
+  background: #fff7e6;
+  color: #ff8c00;
+}
+
+.cascader-option .check-icon {
+  margin-left: 8px;
+}
+
+.cascader-search {
+  padding: 8px 12px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.cascader-search input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+}
+
+/* 多选模式确认按钮 */
+.cascader-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  border-top: 1px solid #e8e8e8;
+  background: #fafafa;
+}
+
+.cascader-footer span {
+  color: #666;
+  font-size: 12px;
+}
+
+.confirm-btn {
+  padding: 4px 16px;
+  background: #ff8c00;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.confirm-btn:hover {
+  background: #e66600;
+}
