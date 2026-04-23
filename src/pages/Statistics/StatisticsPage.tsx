@@ -101,23 +101,24 @@ export default function StatisticsPage() {
         />
       </div>
 
-      {/* 第一行：KPI 卡片 */}
-      <div className={styles['kpi-row']}>
-        <div className={styles['kpi-section']}>
+      {/* 主布局：网格 */}
+      <div className={styles['main-grid']}>
+        {/* 第一行左侧：KPI 卡片 */}
+        <div className={styles['kpi-area']}>
           <KpiCards data={mockKpiData} />
         </div>
-        <div className={styles['status-section']}>
+
+        {/* 右侧设备状态 - 跨越第一行和第二行 */}
+        <div className={styles['status-area']}>
           <StatusSidebar
             deviceStatus={deviceStatus}
             maintenanceStatus={maintenanceStatus}
             runtimeStats={runtimeStats}
           />
         </div>
-      </div>
 
-      {/* 第二行：趋势图表 */}
-      <div className={styles['chart-row']}>
-        <div className={styles['chart-section']}>
+        {/* 第二行左侧：趋势图表 */}
+        <div className={styles['chart-area']}>
           <div className={styles['chart-card']}>
             <TrendChart
               title="药浴牛数/识别率统计分析"
@@ -145,23 +146,16 @@ export default function StatisticsPage() {
             />
           </div>
         </div>
-        <div className={styles['status-section']}>
-          <StatusSidebar
-            deviceStatus={deviceStatus}
-            maintenanceStatus={maintenanceStatus}
-            runtimeStats={runtimeStats}
-          />
-        </div>
-      </div>
 
-      {/* 第三行：环形图和表格 */}
-      <div className={styles['detail-row']}>
-        <div className={styles['donut-card']}>
-          <DonutChart data={mockDonutData} />
-        </div>
-        <div className={styles['table-card']}>
-          <h4 className={styles['card-title']}>详细列表统计</h4>
-          <DetailTable data={mockDetailData} />
+        {/* 第三行：环形图和表格 */}
+        <div className={styles['bottom-area']}>
+          <div className={styles['donut-card']}>
+            <DonutChart data={mockDonutData} />
+          </div>
+          <div className={styles['table-card']}>
+            <h4 className={styles['card-title']}>详细列表统计</h4>
+            <DetailTable data={mockDetailData} />
+          </div>
         </div>
       </div>
     </div>

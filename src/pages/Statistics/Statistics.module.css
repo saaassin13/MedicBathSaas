@@ -10,34 +10,40 @@
   align-items: center;
 }
 
-/* 第一行：KPI + 设备状态 */
-.kpi-row {
+/* 主布局：三列网格 */
+.main-grid {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 1fr 1fr 280px;
+  grid-template-rows: auto auto auto;
   gap: 12px;
 }
 
-.kpi-section {
+/* KPI 区域 - 占据左侧 4 列 */
+.kpi-area {
+  grid-column: 1 / 3;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
 
-/* 第二行：图表 + 设备状态 */
-.chart-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 12px;
-}
-
-.chart-section {
+/* 图表区域 */
+.chart-area {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
 }
 
+/* 右侧设备状态 - 跨越第一行和第二行 */
+.status-area {
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 /* 第三行：环形图 + 表格 */
-.detail-row {
+.bottom-area {
+  grid-column: 1 / 3;
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 12px;
@@ -118,41 +124,27 @@
   padding: 10px;
 }
 
-/* 右侧状态栏 */
-.status-section {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.status-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+/* 右侧设备状态卡片 */
+.status-card {
   background: #fff;
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.status-card {
-  background: #fff;
-  border-radius: 6px;
-  padding: 8px;
+  flex: 1;
 }
 
 .status-card h4 {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   color: #333;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .status-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3px 0;
+  padding: 4px 0;
   border-bottom: 1px solid #f0f0f0;
   font-size: 11px;
 }
