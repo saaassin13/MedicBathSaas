@@ -1,4 +1,8 @@
+import { useState } from 'react'
 import ReactECharts from 'echarts-for-react'
+import { DatePicker } from 'antd'
+import dayjs from 'dayjs'
+import styles from './Statistics.module.css'
 
 interface DonutData {
   total: number
@@ -11,11 +15,15 @@ interface DonutChartProps {
 
 const categoryColors = ['#1890ff', '#52c41a', '#faad14', '#ff4d4f']
 
+const { RangePicker } = DatePicker
+type DateRange = [dayjs.Dayjs | null, dayjs.Dayjs | null] | null
+
 export default function DonutChart({ data }: DonutChartProps) {
+  const [dateRange, setDateRange] = useState<DateRange>(null)
+
   const option = {
-    title: { text: '识别率与覆盖率分析', left: 0, top: 0, textStyle: { fontSize: 14, fontWeight: 500 } },
     tooltip: { trigger: 'item' },
-    legend: { orient: 'vertical', right: 0, top: 'center' },
+    legend: { orient: 'vertical', right: 10, top: 'center' },
     series: [
       {
         type: 'pie',
@@ -33,7 +41,7 @@ export default function DonutChart({ data }: DonutChartProps) {
       {
         type: 'text',
         left: '26%',
-        top: '45%',
+        top: '42%',
         style: {
           text: String(data.total),
           fill: '#333',
@@ -44,7 +52,7 @@ export default function DonutChart({ data }: DonutChartProps) {
       {
         type: 'text',
         left: '25%',
-        top: '55%',
+        top: '52%',
         style: {
           text: '总数',
           fill: '#999',
@@ -54,5 +62,20 @@ export default function DonutChart({ data }: DonutChartProps) {
     ],
   }
 
-  return <ReactECharts option={option} style={{ height: 250 }} />
+  return (
+    <div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+        <h4 style={{ margin: 0, fontSize: 13, fontWeight: 500 }}>识别率与覆盖率分析</h4>
+        <RangePicker
+          value={dateRange}
+          onChange={(dates) => setDateRange(dates as DateRange)}
+          size="small"
+          style={{ width: 220 }}
+        />
+      </div>
+      <div className={styles['chart-wrapper']} style={{ height: 220 }}>
+        <ReactECharts option={option} style={{ height: '100%', width: '100%' }} />
+      </div>
+    </div>
+  )
 }

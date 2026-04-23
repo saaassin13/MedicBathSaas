@@ -126,8 +126,8 @@ export default function StatisticsPage() {
               lineData={mockTrendData.recognitionTrend}
               barColor="#1890ff"
               lineColor="#ff8c00"
-              leftUnit="牛数"
-              rightUnit="%"
+              leftUnit="药浴牛数（头）"
+              rightUnit="乳头识别率（%）"
               leftMax={10000}
               rightMax={100}
             />
@@ -139,8 +139,8 @@ export default function StatisticsPage() {
               lineData={mockTrendData.avgTrend}
               barColor="#52c41a"
               lineColor="#722ed1"
-              leftUnit="L"
-              rightUnit="ML"
+              leftUnit="药液用量（L）"
+              rightUnit="药液均量（ML）"
               leftMax={300}
               rightMax={20}
             />
@@ -153,7 +153,6 @@ export default function StatisticsPage() {
             <DonutChart data={mockDonutData} />
           </div>
           <div className={styles['table-card']}>
-            <h4 className={styles['card-title']}>详细列表统计</h4>
             <DetailTable data={mockDetailData} />
           </div>
         </div>

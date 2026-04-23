@@ -183,9 +183,15 @@ export default function Cascader({
     return result
   }
 
+  // 面板位置：右侧时向左展开
   const panelStyle: React.CSSProperties = panelPosition === 'right'
     ? { left: 'auto', right: 0 }
     : { left: 0, right: 'auto' }
+
+  const columnsContainerStyle: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: panelPosition === 'right' ? 'row-reverse' : 'row'
+  }
 
   return (
     <div className={styles['cascader-wrapper']} ref={wrapperRef}>
@@ -211,7 +217,9 @@ export default function Cascader({
               </div>
             </div>
           )}
-          {renderColumns()}
+          <div style={columnsContainerStyle}>
+            {renderColumns()}
+          </div>
           {mode === 'multiple' && (
             <div className={styles['cascader-footer']}>
               <span>已选 {selectedValues.length} 项</span>

@@ -21,6 +21,17 @@ interface StatusSidebarProps {
   runtimeStats: RuntimeStats
 }
 
+const deviceStatusText = {
+  normal: '已连接',
+  warning: '启动中',
+  error: '未连接',
+}
+
+const maintenanceStatusText = {
+  normal: '正常',
+  expired: '已过期',
+}
+
 export default function StatusSidebar({ deviceStatus, maintenanceStatus, runtimeStats }: StatusSidebarProps) {
   return (
     <div className={styles['status-sidebar']}>
@@ -29,7 +40,10 @@ export default function StatusSidebar({ deviceStatus, maintenanceStatus, runtime
         {deviceStatus.map((device) => (
           <div key={device.name} className={styles['status-item']}>
             <span>{device.name}</span>
-            <span className={`${styles['status-dot']} ${styles[device.status]}`} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <span className={`${styles['status-dot']} ${styles[device.status]}`} />
+              <span style={{ fontSize: 11 }}>{deviceStatusText[device.status]}</span>
+            </div>
           </div>
         ))}
       </div>
@@ -38,7 +52,10 @@ export default function StatusSidebar({ deviceStatus, maintenanceStatus, runtime
         {maintenanceStatus.map((item) => (
           <div key={item.name} className={styles['status-item']}>
             <span>{item.name}</span>
-            <span className={`${styles['status-dot']} ${styles[item.status === 'expired' ? 'error' : 'normal']}`} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+              <span className={`${styles['status-dot']} ${styles[item.status === 'expired' ? 'error' : 'normal']}`} />
+              <span style={{ fontSize: 11 }}>{maintenanceStatusText[item.status]}</span>
+            </div>
           </div>
         ))}
       </div>
