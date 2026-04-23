@@ -101,9 +101,9 @@
   margin-bottom: 10px;
 }
 
-/* 环形图和表格区域 */
+/* 环形图和表格区域 - 占满整个宽度 */
 .detail-area {
-  grid-column: 1;
+  grid-column: 1 / 3;
   grid-row: 3;
   display: grid;
   grid-template-columns: 1fr 2fr;
