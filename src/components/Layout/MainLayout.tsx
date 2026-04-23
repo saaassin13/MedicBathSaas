@@ -37,17 +37,21 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <div className={styles['main-layout']}>
-      <div className={styles['sidebar-wrapper']}>
-        <Sidebar
-          collapsed={collapsed}
-          onCollapse={setCollapsed}
-          activePath={getActivePath()}
-          onNavigate={(path) => navigate(path)}
-        />
-      </div>
-      <div className={styles['content-wrapper']}>
+      <div className={styles['top-bar']}>
         <Header />
-        <main className={styles['main-content']}>{children}</main>
+      </div>
+      <div className={styles['body']}>
+        <div className={styles['sidebar-wrapper']}>
+          <Sidebar
+            collapsed={collapsed}
+            onCollapse={setCollapsed}
+            activePath={getActivePath()}
+            onNavigate={(path) => navigate(path)}
+          />
+        </div>
+        <div className={styles['content-wrapper']}>
+          <main className={styles['main-content']}>{children}</main>
+        </div>
       </div>
     </div>
   )
