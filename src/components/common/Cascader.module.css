@@ -5,15 +5,16 @@
 
 .cascader-input {
   width: 240px;
-  height: 32px;
-  padding: 0 10px;
+  height: 28px;
+  padding: 0 8px;
   border: 1px solid #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 11px;
+  background: #fff;
 }
 
 .cascader-input:focus {
@@ -40,7 +41,7 @@
 .cascader-column {
   width: 100px;
   border-right: 1px solid #e8e8e8;
-  max-height: 240px;
+  max-height: 200px;
   overflow-y: auto;
 }
 
@@ -49,12 +50,13 @@
 }
 
 .cascader-option {
-  padding: 6px 10px;
+  padding: 5px 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 11px;
+  gap: 4px;
 }
 
 .cascader-option:hover {
@@ -66,21 +68,55 @@
   color: #ff8c00;
 }
 
-.cascader-option .check-icon {
-  margin-left: 8px;
+.optionLabel {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.arrow {
+  color: #999;
+  font-size: 8px;
+  flex-shrink: 0;
+}
+
+/* 单选模式圆形图标 */
+.radio {
+  width: 10px;
+  height: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-right: 4px;
+}
+
+.radio.radioSelected {
+  border-color: #ff8c00;
+  background: #ff8c00;
+  box-shadow: inset 0 0 0 2px #fff;
+}
+
+/* 多选模式复选框 */
+.checkbox {
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 
 .cascader-search {
-  padding: 6px 10px;
+  padding: 5px 8px;
   border-bottom: 1px solid #e8e8e8;
 }
 
 .cascader-search input {
   width: 100%;
-  padding: 4px 6px;
+  padding: 3px 5px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 /* 多选模式确认按钮 */
@@ -88,24 +124,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 10px;
+  padding: 5px 8px;
   border-top: 1px solid #e8e8e8;
   background: #fafafa;
+  min-width: 80px;
 }
 
 .cascader-footer span {
   color: #666;
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .confirm-btn {
-  padding: 2px 12px;
+  padding: 2px 10px;
   background: #ff8c00;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .confirm-btn:hover {

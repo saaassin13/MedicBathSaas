@@ -29,6 +29,7 @@ export default function Cascader({
   const [selectedValues, setSelectedValues] = useState<string[]>(value)
   const [searchValue, setSearchValue] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')
+  const [panelPosition, setPanelPosition] = useState<'left' | 'right'>('left')
   const wrapperRef = useRef<HTMLDivElement>(null)
   const searchTimeoutRef = useRef<ReturnType<typeof setTimeout>>()
 
@@ -56,6 +57,19 @@ export default function Cascader({
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
+
+  // 检测面板是否超出屏幕右侧
+  useEffect(() => {
+    if (open && wrapperRef.current) {
+      const rect = wrapperRef.current.getBoundingClientRect()
+      const panelWidth = mode === 'multiple' ? 320 : 200 // 估算面板宽度
+      if (rect.right + panelWidth > window.innerWidth) {
+        setPanelPosition('right')
+      } else {
+        setPanelPosition('left')
+      }
+    }
+  }, [open, mode])
 
   const findOption = (opts: CascaderOption[], key: string): CascaderOption | null => {
     for (const opt of opts) {
@@ -126,11 +140,14 @@ export default function Cascader({
                 type="checkbox"
                 checked={isSelected}
                 onChange={() => {}}
-                style={{ marginRight: 8 }}
+                className={styles.checkbox}
               />
             )}
-            <span style={{ flex: 1 }}>{opt.label}</span>
-            {hasChildren && <span style={{ color: '#999' }}>{isActive ? '▼' : '▶'}</span>}
+            {mode === 'single' && (
+              <span className={`${styles.radio} ${isSelected ? styles.radioSelected : ''}`} />
+            )}
+            <span className={styles.optionLabel}>{opt.label}</span>
+            {hasChildren && <span className={styles.arrow}>{isActive ? '▼' : '▶'}</span>}
           </div>
         )
       })
@@ -166,6 +183,10 @@ export default function Cascader({
     return result
   }
 
+  const panelStyle: React.CSSProperties = panelPosition === 'right'
+    ? { left: 'auto', right: 0 }
+    : { left: 0, right: 'auto' }
+
   return (
     <div className={styles['cascader-wrapper']} ref={wrapperRef}>
       <div
@@ -177,7 +198,7 @@ export default function Cascader({
         <span>{open ? '▲' : '▼'}</span>
       </div>
       {open && (
-        <div className={styles['cascader-panel']}>
+        <div className={styles['cascader-panel']} style={panelStyle}>
           {mode === 'multiple' && (
             <div className={styles['cascader-column']}>
               <div className={styles['cascader-search']}>
@@ -185,6 +206,7 @@ export default function Cascader({
                   placeholder="搜索"
                   value={searchValue}
                   onChange={(e) => setSearchValue(e.target.value)}
+                  className={styles.searchInput}
                 />
               </div>
             </div>
