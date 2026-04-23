@@ -41,7 +41,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
         <Header />
       </div>
       <div className={styles.body}>
-        <div className={styles.sidebarWrapper}>
+        <div className={`${styles.sidebarWrapper} ${collapsed ? styles.collapsed : ''}`}>
           <Sidebar
             collapsed={collapsed}
             onCollapse={setCollapsed}
