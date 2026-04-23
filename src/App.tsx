@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom'
+import { HashRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import MainLayout from './components/Layout/MainLayout'
 import LoginPage from './pages/Login/LoginPage'
 import UserManagePage from './pages/UserManagement/UserManagePage'
@@ -11,7 +11,7 @@ import HistoryStatisticsPage from './pages/Statistics/HistoryStatisticsPage'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />
@@ -51,7 +51,7 @@ function App() {
           }
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
