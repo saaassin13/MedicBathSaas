@@ -153,27 +153,25 @@ export default function HistoryStatisticsPage() {
   }, [selectedHall, dateRange])
 
   const columns: ColumnsType<HistoryRecord> = [
-    { title: '奶厅', dataIndex: 'hall', key: 'hall', width: 200 },
-    { title: '开始时间', dataIndex: 'startTime', key: 'startTime', width: 150 },
-    { title: '结束时间', dataIndex: 'endTime', key: 'endTime', width: 150 },
-    { title: '运行时长', dataIndex: 'duration', key: 'duration', width: 100 },
-    { title: '识别牛数', dataIndex: 'recognizedCows', key: 'recognizedCows', width: 80 },
-    { title: '识别乳头', dataIndex: 'recognizedNipples', key: 'recognizedNipples', width: 80 },
-    { title: '未识别乳头', dataIndex: 'unrecognizedNipples', key: 'unrecognizedNipples', width: 80 },
-    { title: '乳头识别率', dataIndex: 'recognitionRate', key: 'recognitionRate', width: 100, render: (v) => `${v.toFixed(2)}%` },
-    { title: '识别牛只', dataIndex: 'recognizedCowCount', key: 'recognizedCowCount', width: 80 },
-    { title: '未脱杯', dataIndex: 'notCupRemoved', key: 'notCupRemoved', width: 80 },
-    { title: '防褪链', dataIndex: 'antiFadeChain', key: 'antiFadeChain', width: 80 },
-    { title: '牛腿过窄', dataIndex: 'narrowCowLeg', key: 'narrowCowLeg', width: 80 },
-    { title: '异常跳过', dataIndex: 'abnormalSkip', key: 'abnormalSkip', width: 80 },
-    { title: '漏喷牛只', dataIndex: 'missedSprayCows', key: 'missedSprayCows', width: 80 },
+    { title: '奶厅', dataIndex: 'hall', key: 'hall', width: 140, ellipsis: true },
+    { title: '开始时间', dataIndex: 'startTime', key: 'startTime', width: 110, ellipsis: true },
+    { title: '结束时间', dataIndex: 'endTime', key: 'endTime', width: 110, ellipsis: true },
+    { title: '运行时长', dataIndex: 'duration', key: 'duration', width: 80, ellipsis: true },
+    { title: '识别牛数', dataIndex: 'recognizedCows', key: 'recognizedCows', width: 70 },
+    { title: '识别乳头', dataIndex: 'recognizedNipples', key: 'recognizedNipples', width: 70 },
+    { title: '未识别', dataIndex: 'unrecognizedNipples', key: 'unrecognizedNipples', width: 60 },
+    { title: '识别率', dataIndex: 'recognitionRate', key: 'recognitionRate', width: 70, render: (v) => `${v.toFixed(1)}%` },
+    { title: '未脱杯', dataIndex: 'notCupRemoved', key: 'notCupRemoved', width: 60 },
+    { title: '防褪链', dataIndex: 'antiFadeChain', key: 'antiFadeChain', width: 60 },
+    { title: '窄腿', dataIndex: 'narrowCowLeg', key: 'narrowCowLeg', width: 50 },
+    { title: '跳过一次', dataIndex: 'abnormalSkip', key: 'abnormalSkip', width: 60 },
+    { title: '漏喷', dataIndex: 'missedSprayCows', key: 'missedSprayCows', width: 50 },
     {
       title: '操作',
       key: 'action',
-      width: 80,
-      render: (_, record) => (
-        <Button type="link" size="small" icon={<DownloadOutlined />}
-          onClick={() => exportToExcel([record], '单条导出')}>
+      width: 60,
+      render: () => (
+        <Button type="link" size="small" icon={<DownloadOutlined />}>
           导出
         </Button>
       ),

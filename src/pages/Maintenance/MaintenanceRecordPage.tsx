@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { Select, DatePicker, Empty } from 'antd'
 import dayjs from 'dayjs'
 import { MaintenanceRecord } from '../../types'
+import Cascader from '../../components/common/Cascader'
 import styles from './Maintenance.module.css'
 
 const mockRecords: MaintenanceRecord[] = [
@@ -14,8 +15,32 @@ const mockRecords: MaintenanceRecord[] = [
 const { RangePicker } = DatePicker
 type DateRange = [dayjs.Dayjs | null, dayjs.Dayjs | null] | null
 
+// 级联下拉数据
+const hallOptions = [
+  {
+    value: 'mengniu',
+    label: '蒙牛集团',
+    children: [
+      {
+        value: 'northeast',
+        label: '东北大区',
+        children: [
+          {
+            value: 'shuangcheng',
+            label: '双城牧场',
+            children: [
+              { value: 'hall-1', label: '1期奶厅' },
+              { value: 'hall-2', label: '2期奶厅' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+]
+
 export default function MaintenanceRecordPage() {
-  const [selectedHall, setSelectedHall] = useState('all')
+  const [selectedHall, setSelectedHall] = useState<string[]>([])
   const [selectedContent, setSelectedContent] = useState('all')
   const [dateRange, setDateRange] = useState<DateRange>(null)
   const [records] = useState<MaintenanceRecord[]>(mockRecords)
@@ -24,7 +49,7 @@ export default function MaintenanceRecordPage() {
   const filteredRecords = useMemo(() => {
     return records.filter(record => {
       // 奶厅筛选
-      if (selectedHall !== 'all' && record.hallId !== selectedHall) return false
+      if (selectedHall.length > 0 && !selectedHall.includes(record.hallId)) return false
       // 维保内容筛选
       if (selectedContent !== 'all' && record.content !== selectedContent) return false
       // 日期范围筛选
@@ -43,15 +68,13 @@ export default function MaintenanceRecordPage() {
       </div>
       <div className={styles['content-card']}>
         <div className={styles['filter-bar']}>
-          <Select
+          <Cascader
+            options={hallOptions}
+            mode="single"
+            placeholder="选择奶厅"
             value={selectedHall}
-            onChange={setSelectedHall}
-            options={[
-              { value: 'all', label: '全部奶厅' },
-              { value: 'hall-1', label: '1号奶厅' },
-              { value: 'hall-2', label: '2号奶厅' },
-            ]}
-            style={{ width: 150 }}
+            onChange={(values) => setSelectedHall(values)}
+            width={200}
           />
           <Select
             value={selectedContent}

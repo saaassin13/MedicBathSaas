@@ -37,13 +37,15 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <div className={styles['main-layout']}>
-      <Sidebar
-        collapsed={collapsed}
-        onCollapse={setCollapsed}
-        activePath={getActivePath()}
-        onNavigate={(path) => navigate(path)}
-      />
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <div className={styles['sidebar-wrapper']}>
+        <Sidebar
+          collapsed={collapsed}
+          onCollapse={setCollapsed}
+          activePath={getActivePath()}
+          onNavigate={(path) => navigate(path)}
+        />
+      </div>
+      <div className={styles['content-wrapper']}>
         <Header />
         <main className={styles['main-content']}>{children}</main>
       </div>

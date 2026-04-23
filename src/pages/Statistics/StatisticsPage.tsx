@@ -105,21 +105,22 @@ export default function StatisticsPage() {
         </div>
       </div>
 
-      <div className={styles['detail-section']}>
-        <div className={styles['donut-card']}>
-          <DonutChart data={mockDonutData} />
+      <div className={styles['bottom-section']}>
+        <div className={styles['detail-section']}>
+          <div className={styles['donut-card']}>
+            <DonutChart data={mockDonutData} />
+          </div>
+          <div className={styles['table-card']}>
+            <h4 style={{ marginBottom: 16 }}>详细列表统计</h4>
+            <DetailTable data={mockDetailData} />
+          </div>
         </div>
-        <div className={styles['table-card']}>
-          <h4 style={{ marginBottom: 16 }}>详细列表统计</h4>
-          <DetailTable data={mockDetailData} />
-        </div>
+        <StatusSidebar
+          deviceStatus={deviceStatus}
+          maintenanceStatus={maintenanceStatus}
+          runtimeStats={runtimeStats}
+        />
       </div>
-
-      <StatusSidebar
-        deviceStatus={deviceStatus}
-        maintenanceStatus={maintenanceStatus}
-        runtimeStats={runtimeStats}
-      />
     </div>
   )
 }

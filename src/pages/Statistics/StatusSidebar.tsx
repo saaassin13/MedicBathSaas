@@ -46,11 +46,11 @@ export default function StatusSidebar({ deviceStatus, maintenanceStatus, runtime
         <h4>运行时间统计</h4>
         <div className={styles['status-item']}>
           <span>累计运行时长</span>
-          <span>{runtimeStats.total}</span>
+          <span className={styles['value']}>{runtimeStats.total}</span>
         </div>
         <div className={styles['status-item']}>
           <span>当班运行时长</span>
-          <span>{runtimeStats.shift}</span>
+          <span className={styles['value']}>{runtimeStats.shift}</span>
         </div>
       </div>
     </div>

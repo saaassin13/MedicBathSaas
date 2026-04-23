@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Table, Select } from 'antd'
+import { Table } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import { MaintenancePlan } from '../../types'
+import Cascader from '../../components/common/Cascader'
 import styles from './Maintenance.module.css'
 
 const mockPlans: MaintenancePlan[] = [
@@ -25,13 +26,32 @@ function calculateRemainingTime(lastTime: string, cycleHours: number): string {
   return days > 0 ? `${days}天${remainingHours}小时` : `${hours}小时`
 }
 
+// 级联下拉数据
 const hallOptions = [
-  { value: 'hall-1', label: '1号奶厅' },
-  { value: 'hall-2', label: '2号奶厅' },
+  {
+    value: 'mengniu',
+    label: '蒙牛集团',
+    children: [
+      {
+        value: 'northeast',
+        label: '东北大区',
+        children: [
+          {
+            value: 'shuangcheng',
+            label: '双城牧场',
+            children: [
+              { value: 'hall-1', label: '1期奶厅' },
+              { value: 'hall-2', label: '2期奶厅' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ]
 
 export default function MaintenancePlanPage() {
-  const [selectedHall, setSelectedHall] = useState('hall-1')
+  const [selectedHall, setSelectedHall] = useState<string[]>([])
   const [plans] = useState<MaintenancePlan[]>(mockPlans)
 
   const columns: ColumnsType<MaintenancePlan> = [
@@ -61,11 +81,13 @@ export default function MaintenancePlanPage() {
       </div>
       <div className={styles['content-card']}>
         <div className={styles['filter-bar']}>
-          <Select
-            value={selectedHall}
-            onChange={setSelectedHall}
+          <Cascader
             options={hallOptions}
-            style={{ width: 200 }}
+            mode="single"
+            placeholder="选择奶厅"
+            value={selectedHall}
+            onChange={(values) => setSelectedHall(values)}
+            width={200}
           />
         </div>
         <Table

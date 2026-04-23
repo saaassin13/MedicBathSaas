@@ -5,14 +5,15 @@
 
 .cascader-input {
   width: 240px;
-  height: 40px;
-  padding: 0 12px;
+  height: 32px;
+  padding: 0 10px;
   border: 1px solid #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 12px;
 }
 
 .cascader-input:focus {
@@ -37,9 +38,9 @@
 }
 
 .cascader-column {
-  width: 120px;
+  width: 100px;
   border-right: 1px solid #e8e8e8;
-  max-height: 300px;
+  max-height: 240px;
   overflow-y: auto;
 }
 
@@ -48,11 +49,12 @@
 }
 
 .cascader-option {
-  padding: 8px 12px;
+  padding: 6px 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font-size: 12px;
 }
 
 .cascader-option:hover {
@@ -69,15 +71,16 @@
 }
 
 .cascader-search {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-bottom: 1px solid #e8e8e8;
 }
 
 .cascader-search input {
   width: 100%;
-  padding: 6px 8px;
+  padding: 4px 6px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
+  font-size: 12px;
 }
 
 /* 多选模式确认按钮 */
@@ -85,24 +88,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-top: 1px solid #e8e8e8;
   background: #fafafa;
 }
 
 .cascader-footer span {
   color: #666;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .confirm-btn {
-  padding: 4px 16px;
+  padding: 2px 12px;
   background: #ff8c00;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .confirm-btn:hover {

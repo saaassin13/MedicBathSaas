@@ -63,21 +63,21 @@ export default function Sidebar({ collapsed, onCollapse, activePath, onNavigate 
 
   return (
     <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '16px' }}>
-        <button onClick={() => onCollapse(!collapsed)}>
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </button>
-      </div>
       <Menu
-        theme="dark"
+        theme="light"
         mode="inline"
         selectedKeys={[activePath]}
         openKeys={openKeys}
         onOpenChange={(keys) => setOpenKeys(keys as string[])}
         items={menuItems}
         onClick={onClick}
-        style={{ borderRight: 0 }}
+        style={{ borderRight: 0, flex: 1 }}
       />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '16px', borderTop: '1px solid #e8e8e8' }}>
+        <button onClick={() => onCollapse(!collapsed)}>
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        </button>
+      </div>
     </div>
   )
 }

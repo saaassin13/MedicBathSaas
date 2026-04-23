@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { Select, DatePicker, Empty } from 'antd'
 import { FaultLog, LogLevel } from '../../types'
+import Cascader from '../../components/common/Cascader'
 import styles from './FaultLog.module.css'
 import dayjs from 'dayjs'
 
@@ -15,6 +16,30 @@ const mockLogs: FaultLog[] = [
 const { RangePicker } = DatePicker
 type DateRange = [dayjs.Dayjs | null, dayjs.Dayjs | null] | null
 
+// 级联下拉数据
+const hallOptions = [
+  {
+    value: 'mengniu',
+    label: '蒙牛集团',
+    children: [
+      {
+        value: 'northeast',
+        label: '东北大区',
+        children: [
+          {
+            value: 'shuangcheng',
+            label: '双城牧场',
+            children: [
+              { value: 'hall-1', label: '1期奶厅' },
+              { value: 'hall-2', label: '2期奶厅' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+]
+
 const getLogLevelText = (level: LogLevel) => {
   switch (level) {
     case 'info': return '提示'
@@ -24,7 +49,7 @@ const getLogLevelText = (level: LogLevel) => {
 }
 
 export default function FaultLogPage() {
-  const [selectedHall, setSelectedHall] = useState('all')
+  const [selectedHall, setSelectedHall] = useState<string[]>([])
   const [selectedLevel, setSelectedLevel] = useState('all')
   const [dateRange, setDateRange] = useState<DateRange>(null)
   const [logs] = useState<FaultLog[]>(mockLogs)
@@ -33,7 +58,7 @@ export default function FaultLogPage() {
   const filteredLogs = useMemo(() => {
     return logs.filter(log => {
       // 奶厅筛选
-      if (selectedHall !== 'all' && log.hallId !== selectedHall) return false
+      if (selectedHall.length > 0 && !selectedHall.includes(log.hallId)) return false
       // 故障等级筛选
       if (selectedLevel !== 'all' && log.level !== selectedLevel) return false
       // 日期范围筛选
@@ -52,15 +77,13 @@ export default function FaultLogPage() {
       </div>
       <div className={styles['content-card']}>
         <div className={styles['filter-bar']}>
-          <Select
+          <Cascader
+            options={hallOptions}
+            mode="single"
+            placeholder="选择奶厅"
             value={selectedHall}
-            onChange={setSelectedHall}
-            options={[
-              { value: 'all', label: '全部奶厅' },
-              { value: 'hall-1', label: '1号奶厅' },
-              { value: 'hall-2', label: '2号奶厅' },
-            ]}
-            style={{ width: 150 }}
+            onChange={(values) => setSelectedHall(values)}
+            width={200}
           />
           <Select
             value={selectedLevel}
